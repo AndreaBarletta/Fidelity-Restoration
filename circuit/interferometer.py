@@ -48,7 +48,7 @@ class interferometer:
                 phi = comp.params[0] + params_error
                 T[comp.modes[0] - 1, comp.modes[0] - 1] = np.exp(1j * phi)
             elif comp.type == cmp_type.LOSS_ELEMENT:
-                loss = 10 ** (-LN_dB / 10)  # Convert dB to linear scale
+                loss = 10 ** (LN_dB / 10)  # Convert dB to linear scale
                 T[comp.modes[0] - 1, comp.modes[0] - 1] = np.sqrt(loss)
             elif comp.type == cmp_type.BARRIER:
                 # Barrier does not change the transformation matrix, so we skip it
