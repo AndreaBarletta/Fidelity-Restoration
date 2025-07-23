@@ -51,3 +51,10 @@ In particular we added the support for:
   - more components (phase shifters, losses)
   - possibility to introduce non-idealities in the computation of the transfer function
   - improvements to modularity in the drawing, for example the possiblity to introduce barriers to align components
+
+## References
+
+[1] Reck, Michael, et al. "Experimental realization of any discrete unitary operator." Physical review letters 73.1 (1994): 58. <br>
+[2] Clements, William R., et al. "Optimal design for universal multiport interferometers." Optica 3.12 (2016): 1460-1465.<br>
+[3] Tsakyridis, A., Giamougiannis, G., Totovic, A. and Pleros, N. (2022), Fidelity Restorable Universal Linear Optics. Adv. Photonics Res., 3: 2200001. https://doi.org/10.1002/adpr.202200001<br>
+[4] P. Dita, J. Phys. A: Math. Gen. 2006, 36, 2781. <br>
