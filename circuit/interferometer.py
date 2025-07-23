@@ -26,7 +26,7 @@ class interferometer:
         highest_index = max([max(comp.modes) for comp in self.comp_list])
         return highest_index
 
-    def calculate_transformation(self, LN_dB=0.0, params_error=0.0):
+    def calculate_transformation(self, LN_dB=0.0, sd=0.0):
         """Calculate unitary matrix describing the transformation implemented by the interferometer
     
         Returns:
@@ -38,14 +38,14 @@ class interferometer:
         for comp in self.comp_list:
             T = np.eye(N, dtype=np.complex128)
             if comp.type == cmp_type.BEAM_SPLITTER:
-                theta = comp.params[0] + params_error
-                phi = comp.params[1] + params_error
+                theta = np.random.normal(comp.params[0], sd)
+                phi = np.random.normal(comp.params[1], sd)
                 T[comp.modes[0] - 1, comp.modes[0] - 1] = np.exp(1j * phi) * np.cos(theta)
                 T[comp.modes[0] - 1, comp.modes[1] - 1] = -np.sin(theta)
                 T[comp.modes[1] - 1, comp.modes[0] - 1] = np.exp(1j * phi) * np.sin(theta)
                 T[comp.modes[1] - 1, comp.modes[1] - 1] = np.cos(theta)
             elif comp.type == cmp_type.PHASE_SHIFTER:
-                phi = comp.params[0] + params_error
+                phi = np.random.normal(comp.params[0],sd)
                 T[comp.modes[0] - 1, comp.modes[0] - 1] = np.exp(1j * phi)
             elif comp.type == cmp_type.LOSS_ELEMENT:
                 loss = 10 ** (LN_dB / 10)  # Convert dB to linear scale
@@ -61,7 +61,7 @@ class interferometer:
         while np.size(self.output_phases) < N:  # Autofill for users who don't want to bother with output phases
             self.output_phases.append(0)
 
-        D = np.diag(np.exp([1j * phase for phase in self.output_phases]))
+        D = np.diag(np.exp([1j * np.random.normal(phase, sd) for phase in self.output_phases]))
         U = np.matmul(D,U)
         return U
 
