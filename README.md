@@ -34,6 +34,8 @@ jupyter notebook main.ipynb
 > pip install notebook
 > ```
 
+for more intructions, visit the [Jupyter website](https://jupyter.org/)
+
 ## File Structure
 
 ```
